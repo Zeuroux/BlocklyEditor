@@ -208,7 +208,7 @@
                         </select>
                         <br>
                         <span id="renderSpan" class="UIText">choose block renderer</span>
-                        <select name="renderer" onchange="document.forms.options.submit('options')">
+                        <select name="renderer" onchange="localStorage.setItem('selectedRenderer', this.value); window.location.reload();">
                             <option value="geras">Geras</option>
                             <option value="thrasos">Thrasos</option>
                             <option value="zelos">Zelos</option>
@@ -216,45 +216,47 @@
                         </select>
                     </form>
                     <br>
-                    <span id="displaySpan" class="UIText">display choice</span>
-                    <select name="displayChoice" onchange="">
-                        <option value="button" id="displayChoiceButtons">buttons only</option>
-                        <option value="buttonText" id="displayChoiceBandT">buttons + text</option>
-                        <option value="text" id="displayChoiceText">text only</option>
-                    </select>
-                    <br>
-                    <br>
-                    <span id="fontSpan" class="UIText">font choice</span>
-                    <select name="fontChoice" onchange="document.forms.options.submit('options')">
-                        <option value="arial">Arial</option>
-                        <option value="comics">Comic Sans MS</option>
-                        <option value="luciole">Luciole</option>
-                        <option value="opendyslexic">Open Dyslexic</option>
-                        <option value="trebuchet">Trebuchet MS</option>
-                        <option value="verdana">Verdana</option>
-                    </select>
-                    <br>
-                    <span id="fontSizeSpan" class="UIText">rendering</span>
-                    <select id="rendering-constant-selector">
-                        <option value="fontSizeBlocks" id="optionFontSizeBlocks" selected="selected">Blocks Font Size</option>
-                        <option value="fontSizePage" id="optionFontSizePage">Page Font Size</option>
-                        <option value="fontSpacingPage" id="optionFontSpacingPage">Page Font Spacing</option>
-                    </select>
-                    <br>
-                    <input type="range" min="3" max="50" value="4" oninput="Code.changeRenderingConstant(this.value)" onchange="Code.changeRenderingConstant(this.value)">
-                    <br>
-                    <br>
-                    <input id="accessibilityModeCheck" type="checkbox" onclick="toggleAccessibilityMode(this.checked)">
-                    <span id="accessibilitySpan" class="UIText">enable Accessibility Mode</span>
-                    <br>
+                    <div hidden="hidden">
+                        <span id="displaySpan" class="UIText">display choice</span>
+                        <select name="displayChoice" onchange="">
+                            <option value="button" id="displayChoiceButtons">buttons only</option>
+                            <option value="buttonText" id="displayChoiceBandT">buttons + text</option>
+                            <option value="text" id="displayChoiceText">text only</option>
+                        </select>
+                        <br>
+                        <br>
+                        <span id="fontSpan" class="UIText">font choice</span>
+                        <select name="fontChoice" onchange="document.forms.options.submit('options')">
+                            <option value="arial">Arial</option>
+                            <option value="comics">Comic Sans MS</option>
+                            <option value="luciole">Luciole</option>
+                            <option value="opendyslexic">Open Dyslexic</option>
+                            <option value="trebuchet">Trebuchet MS</option>
+                            <option value="verdana">Verdana</option>
+                        </select>
+                        <br>
+                        <span id="fontSizeSpan" class="UIText">rendering</span>
+                        <select id="rendering-constant-selector">
+                            <option value="fontSizeBlocks" id="optionFontSizeBlocks" selected="selected">Blocks Font Size</option>
+                            <option value="fontSizePage" id="optionFontSizePage">Page Font Size</option>
+                            <option value="fontSpacingPage" id="optionFontSpacingPage">Page Font Spacing</option>
+                        </select>
+                        <br>
+                        <input type="range" min="3" max="50" value="4" oninput="Code.changeRenderingConstant(this.value)" onchange="Code.changeRenderingConstant(this.value)">
+                        <br>
+                        <br>
+                        <input id="accessibilityModeCheck" type="checkbox" onclick="toggleAccessibilityMode(this.checked)">
+                        <span id="accessibilitySpan" class="UIText">enable Accessibility Mode</span>
+                        <br>
+                        <select id="cursorChanger" name="cursor" onchange="changeCursor(this.value)">
+                            <option value="default" id="defaultCursorSpan">Default Cursor</option> 
+                            <option value="basic" id="basicCursorSpan">Basic Cursor</option>
+                            <option value="line" id="lineCursorSpan">Line Cursor</option>
+                        </select>
+                    </div>
+                    
                     <input id="displayKeyMappings" type="checkbox" onclick="toggleDisplayKeyMappings(this.checked)">
-                    <span id="keyMappingSpan" class="UIText">open key mappings</span>
-                    <br>
-                    <select id="cursorChanger" name="cursor" onchange="changeCursor(this.value)">
-                        <option value="default" id="defaultCursorSpan">Default Cursor</option> 
-                        <option value="basic" id="basicCursorSpan">Basic Cursor</option>
-                        <option value="line" id="lineCursorSpan">Line Cursor</option>
-                    </select>
+                    <span id="keyMappingSpan" class="UIText">open key mappings</span>                    
                     <br>
                 </div>
                 <button hidden="hidden" class="accordion">
@@ -519,6 +521,8 @@
         ace.require("ace/ext/language_tools");
         var editor = ace.edit("content_code");
         var selectedTheme = localStorage.getItem('selectedTheme') || 'classic';
+        const select = document.querySelector('select[name="theme"]');
+        select.value = selectedTheme;
         changeTheme(selectedTheme);
         editor.session.setMode("ace/mode/c_cpp");
         editor.setShowPrintMargin(false);

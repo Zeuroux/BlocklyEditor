@@ -108,8 +108,9 @@ Code.init = function () {
         }
     }
 
-    var match = location.search.match(/renderer=([^&]+)/);
-    var renderer = match ? match[1] : 'geras';
+    var renderer = localStorage.getItem('selectedRenderer') || 'geras';
+    const rendererSelect = document.querySelector('select[name="renderer"]');
+    rendererSelect.value = renderer;
     document.forms.options.elements.renderer.value = renderer;
     Code.workspace = Blockly.inject('content_blocks', {
         comments: true,
