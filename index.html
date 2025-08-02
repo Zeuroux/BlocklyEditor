@@ -200,7 +200,7 @@
                         <br>
                         <br>
                         <span id="themeSpan" class="UIText">choose block theme</span>
-                        <select name="theme" onchange="changeTheme(this.value)">
+                        <select name="theme" onchange="localStorage.setItem('selectedTheme', this.value); window.location.reload();">
                             <option value="classic" id="themeClassicSpan">Classic</option>
                             <option value="modern" id="themeModernSpan">Modern</option>
                             <option value="deuteranopia" id="themeDeuteranopiaSpan">Deuteranopia/Protanopia</option>
@@ -522,7 +522,8 @@
     <script>
         ace.require("ace/ext/language_tools");
         var editor = ace.edit("content_code");
-        editor.setTheme("ace/theme/sqlserver");
+        var selectedTheme = localStorage.getItem('selectedTheme') || 'classic';
+        changeTheme(selectedTheme);
         editor.session.setMode("ace/mode/c_cpp");
         editor.setShowPrintMargin(false);
         editor.setOptions({

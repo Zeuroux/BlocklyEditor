@@ -88,7 +88,6 @@ Code.renderContent = function () {
     var generatedCode = Blockly.Arduino.workspaceToCode(Code.workspace);
     editor.setValue(generatedCode, 1);
 };
-
 /**
  * Initialize Blockly.  Called on page load.
  */ 
@@ -227,10 +226,10 @@ Code.init = function () {
     Blockly.svgResize(Code.workspace);
 
     //change theme color
-    match = location.search.match(/theme=([^&]+)/);
-    var theme = match ? match[1] : 'classic';
-    document.forms.options.elements.theme.value = theme;
-    changeTheme(theme);
+    // match = location.search.match(/theme=([^&]+)/);
+    // var theme = match ? match[1] : 'classic';
+    // document.forms.options.elements.theme.value = theme;
+    // changeTheme(theme);
 
     //keyboard nav attribution
     var actions = [

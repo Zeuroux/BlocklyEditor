@@ -62,26 +62,63 @@ function addRenderDebugOptionsCheckboxes() {
     }
 }
 
-function changeTheme(themeChoice) {
-    if (themeChoice === "dark") {
-        Blockly.getMainWorkspace().setTheme(Blockly.Themes.Dark);
-    } else if (themeChoice === "high_contrast") {
-        Blockly.getMainWorkspace().setTheme(Blockly.Themes.HighContrast);
-    } else if (themeChoice === "deuteranopia") {
-        Blockly.getMainWorkspace().setTheme(Blockly.Themes.Deuteranopia);
-    } else if (themeChoice === "tritanopia") {
-        Blockly.getMainWorkspace().setTheme(Blockly.Themes.Tritanopia);
-    } else if (themeChoice === "modern") {
-        Blockly.getMainWorkspace().setTheme(Blockly.Themes.Modern);
-    } else if (themeChoice === "blackWhite") {
-        Blockly.getMainWorkspace().setTheme(Blockly.Themes.blackWhite);
-    } else if (themeChoice === "zelos") {
-        Blockly.getMainWorkspace().setTheme(Blockly.Themes.Zelos);
-    } else {
-        Code.workspace.setTheme(Blockly.Themes.Classic);
-    }
+function waitForSetTheme(callback) {
+    const interval = setInterval(() => {
+        const ws = Blockly.getMainWorkspace?.();
+        if (ws && typeof ws.setTheme === "function") {
+            clearInterval(interval);
+            callback();
+        }
+    }, 50);
 }
-;
+function waitAndCopyStyle() {
+    const interval = setInterval(() => {
+        const sourceEl = document.getElementsByClassName("blocklyToolboxDiv")[0];
+        const targetEl = document.getElementById("lateral-panel-setup-bloc");
+
+        // Check that both elements exist and source has cssText defined
+        if (sourceEl?.style?.cssText && targetEl) {
+            clearInterval(interval);
+            targetEl.style.backgroundColor = sourceEl.style.backgroundColor;
+        }
+    }, 50); // Poll every 50ms
+}
+
+
+function changeTheme(themeChoice) {
+    editor.setTheme("ace/theme/" + ((selectedTheme == 'dark') ? 'monokai' : 'sqlserver'));
+    
+    waitForSetTheme(() => {
+        const workspace = Blockly.getMainWorkspace();
+        switch (themeChoice) {
+            case "dark":
+                workspace.setTheme(Blockly.Themes.Dark);
+                break;
+            case "high_contrast":
+                workspace.setTheme(Blockly.Themes.HighContrast);
+                break;
+            case "deuteranopia":
+                workspace.setTheme(Blockly.Themes.Deuteranopia);
+                break;
+            case "tritanopia":
+                workspace.setTheme(Blockly.Themes.Tritanopia);
+                break;
+            case "modern":
+                workspace.setTheme(Blockly.Themes.Modern);
+                break;
+            case "blackWhite":
+                workspace.setTheme(Blockly.Themes.blackWhite);
+                break;
+            case "zelos":
+                workspace.setTheme(Blockly.Themes.Zelos);
+                break;
+            default:
+                Code.workspace.setTheme(Blockly.Themes.Classic);
+        }
+        waitAndCopyStyle();
+    });
+}
+
 
 /**
  * Sort and list elements with class 'access' for size change

@@ -373,7 +373,7 @@ td.tabMiddle {
     margin: 0;
     border: 0;
     background-color: #ffffff;
-    overflow: auto !important;
+    overflow: hidden !important;
 }
 .config_content {
     margin: 5px;

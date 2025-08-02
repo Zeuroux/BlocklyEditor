@@ -325,9 +325,10 @@ Code.newProject = function () {
     var count = Code.workspace.getAllBlocks().length;
     if (count > 0) {
         Blockly.confirm(Blockly.Msg['DELETE_ALL_BLOCKS'].replace('%1', count), function (confirm) {
-            if (confirm)
+            if (confirm) {
                 Code.workspace.clear();
-                return true;
+                Code.loadBlocks();
+            }
         });
     }
 };

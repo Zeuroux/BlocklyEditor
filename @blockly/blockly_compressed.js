@@ -686,7 +686,22 @@ Blockly.MarkerManager.prototype.unregisterMarker=function(a){var b=this.markers_
 Blockly.MarkerManager.prototype.setCursor=function(a){this.cursor_&&this.cursor_.getDrawer()&&this.cursor_.getDrawer().dispose();if(this.cursor_=a)a=this.workspace_.getRenderer().makeMarkerDrawer(this.workspace_,this.cursor_),this.cursor_.setDrawer(a),this.setCursorSvg(this.cursor_.getDrawer().createDom())};Blockly.MarkerManager.prototype.setCursorSvg=function(a){a?(this.workspace_.getBlockCanvas().appendChild(a),this.cursorSvg_=a):this.cursorSvg_=null};
 Blockly.MarkerManager.prototype.setMarkerSvg=function(a){a?this.workspace_.getBlockCanvas()&&(this.cursorSvg_?this.workspace_.getBlockCanvas().insertBefore(a,this.cursorSvg_):this.workspace_.getBlockCanvas().appendChild(a)):this.markerSvg_=null};Blockly.MarkerManager.prototype.updateMarkers=function(){this.workspace_.keyboardAccessibilityMode&&this.cursorSvg_&&this.workspace_.getCursor().draw()};
 Blockly.MarkerManager.prototype.dispose=function(){for(var a=Object.keys(this.markers_),b=0,c;c=a[b];b++)this.unregisterMarker(c);this.markers_=null;this.cursor_&&(this.cursor_.dispose(),this.cursor_=null)};Blockly.ThemeManager=function(a,b){this.workspace_=a;this.theme_=b;this.subscribedWorkspaces_=[];this.componentDB_=Object.create(null)};Blockly.ThemeManager.prototype.getTheme=function(){return this.theme_};
-Blockly.ThemeManager.prototype.setTheme=function(a){var b=this.theme_;this.theme_=a;if(a=this.workspace_.getInjectionDiv())b&&Blockly.utils.dom.removeClass(a,b.getClassName()),Blockly.utils.dom.addClass(a,this.theme_.getClassName());for(b=0;a=this.subscribedWorkspaces_[b];b++)a.refreshTheme();b=0;a=Object.keys(this.componentDB_);for(var c;c=a[b];b++)for(var d=0,e;e=this.componentDB_[c][d];d++){var f=e.element;e=e.propertyName;var g=this.theme_&&this.theme_.getComponentStyle(c);f.style[e]=g||""}Blockly.hideChaff()};
+Blockly.ThemeManager.prototype.setTheme = function(a) {
+    var b = this.theme_;
+    this.theme_ = a;
+    if (a = this.workspace_.getInjectionDiv()) b && Blockly.utils.dom.removeClass(a, b.getClassName()), Blockly.utils.dom.addClass(a, this.theme_.getClassName());
+    for (b = 0; a = this.subscribedWorkspaces_[b]; b++) a.refreshTheme();
+    b = 0;
+    a = Object.keys(this.componentDB_);
+    for (var c; c = a[b]; b++)
+        for (var d = 0, e; e = this.componentDB_[c][d]; d++) {
+            var f = e.element;
+            e = e.propertyName;
+            var g = this.theme_ && this.theme_.getComponentStyle(c);
+            f.style[e] = g || ""
+        }
+    Blockly.hideChaff()
+};
 Blockly.ThemeManager.prototype.subscribeWorkspace=function(a){this.subscribedWorkspaces_.push(a)};Blockly.ThemeManager.prototype.unsubscribeWorkspace=function(a){a=this.subscribedWorkspaces_.indexOf(a);if(0>a)throw Error("Cannot unsubscribe a workspace that hasn't been subscribed.");this.subscribedWorkspaces_.splice(a,1)};
 Blockly.ThemeManager.prototype.subscribe=function(a,b,c){this.componentDB_[b]||(this.componentDB_[b]=[]);this.componentDB_[b].push({element:a,propertyName:c});b=this.theme_&&this.theme_.getComponentStyle(b);a.style[c]=b||""};Blockly.ThemeManager.prototype.unsubscribe=function(a){if(a)for(var b=Object.keys(this.componentDB_),c=0,d;d=b[c];c++){for(var e=this.componentDB_[d],f=e.length-1;0<=f;f--)e[f].element===a&&e.splice(f,1);this.componentDB_[d].length||delete this.componentDB_[d]}};
 Blockly.ThemeManager.prototype.dispose=function(){this.componentDB_=this.subscribedWorkspaces_=this.theme_=this.owner_=null};Blockly.TouchGesture=function(a,b){Blockly.TouchGesture.superClass_.constructor.call(this,a,b);this.isMultiTouch_=!1;this.cachedPoints_=Object.create(null);this.startDistance_=this.previousScale_=0;this.isPinchZoomEnabled_=this.onStartWrapper_=null};Blockly.utils.object.inherits(Blockly.TouchGesture,Blockly.Gesture);Blockly.TouchGesture.ZOOM_IN_MULTIPLIER=5;Blockly.TouchGesture.ZOOM_OUT_MULTIPLIER=6;

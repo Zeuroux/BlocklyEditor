@@ -129,8 +129,8 @@
 #copyCodeButton{
     /**visibility: hidden;*/
     position: absolute;
-    top: 130px;
-    right: 30px;
+    top: 85px;
+    right: 10px;
     border-radius: 5px;
     z-index: 5;
 }
