@@ -543,5 +543,12 @@
         });
         editor.findNext();
         editor.findPrevious();
+        const toggle = document.getElementById('editorReadOnlyToggle');
+        toggle.addEventListener('touchstart', function (e) {
+            e.preventDefault(); 
+            const checkbox = toggle.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            toggleEditorReadOnly(checkbox);
+        });
     </script>
 </HTML>
