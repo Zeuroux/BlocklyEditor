@@ -22,7 +22,7 @@ const LeanbotBlockStyles = {
 
   "leanbot_rgbled_blocks"                : { "colourPrimary": "#59C059" },
 //"leanbot_rgbled_expression_blocks"     : { "colourPrimary": "#ACE0AC" },  // 1/2
-  "leanbot_rgbled_expression_blocks"     : { "colourPrimary": "#90D590" },  // 2/3
+  "leanbot_rgbled_expression_blocks"     : { "colourPrimary": "#4c654c" },  // 2/3
 
   "leanbot_sound_blocks"                 : { "colourPrimary": "#5CB1D6" },
 //"leanbot_sound_expression_blocks"      : { "colourPrimary": "#AED8EB" },  // 1/2
@@ -34,7 +34,7 @@ const LeanbotBlockStyles = {
 
   "leanbot_irline_blocks"                : { "colourPrimary": "#FFBF00" },
 //"leanbot_irline_expression_blocks"     : { "colourPrimary": "#FFDF80" },  // 1/2
-  "leanbot_irline_expression_blocks"     : { "colourPrimary": "#FFD455" },  // 2/3
+  "leanbot_irline_expression_blocks"     : { "colourPrimary": "#ad9a61" },  // 2/3
 
   "leanbot_comment_blocks"               : { "colourPrimary": "#C6C6C6" },
 //"leanbot_comment_expression_blocks"    : { "colourPrimary": "#E3E3E3" },  // 1/2
