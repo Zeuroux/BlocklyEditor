@@ -73,7 +73,6 @@ function exitFullScreen() {
     } else {
         fullScreenButton.className = 'iconButtons';
         fullScreen_ = false;
-        window.location.reload();
     }
 }
 ;

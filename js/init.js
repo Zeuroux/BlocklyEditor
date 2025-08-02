@@ -151,7 +151,6 @@ Code.init = function () {
             scaleSpeed: 1.1
         }
     });
-    const metrics = Code.workspace.getMetrics();
     var onresize = function (e) {
         var element = container;
         var x = 0;
@@ -164,7 +163,7 @@ Code.init = function () {
         blocklyDiv.style.left = x + 'px';
         blocklyDiv.style.top = y + 'px';
         blocklyDiv.style.width = container.offsetWidth + 'px';
-        blocklyDiv.style.height = container.offsetHeight + 'px';
+        blocklyDiv.style.height = '100%';
         Blockly.svgResize(Code.workspace);
 //        if (Code.workspace.RTL) {
 //          blocklyDiv.style.left = metrics.absoluteLeft + 'px';

@@ -355,14 +355,12 @@ td.tabMiddle {
     min-height: 5px;
     display: flex;
 }
-.content_blocks{
-    width: 100% !important;
-    overflow: hidden;
-}
+
 #content_area{
-    width: calc(100% - 50px);
-    height: 100%;
+    width: 100%;
+    height: auto;
     min-width: 10px;
+    overflow:inherit;
 }
     
 /* side panel */
