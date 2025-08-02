@@ -38,19 +38,21 @@ Blockly.confirm = function(message, callback) {
 
 /** Override Blockly.prompt() with custom implementation. */
 Blockly.prompt = function(message, defaultValue, callback) {
-  console.log('Prompt: ' + message);
-  CustomDialog.show('Prompt', message, {
-    showInput: true,
-    showOkay: true,
-    onOkay: function() {
-      callback(CustomDialog.inputField.value);
-    },
-    showCancel: true,
-    onCancel: function() {
-      callback(null);
-    }
-  });
-  CustomDialog.inputField.value = defaultValue;
+  setTimeout(() => {
+      console.log('Prompt: ' + message);
+      CustomDialog.show('Prompt', message, {
+        showInput: true,
+        showOkay: true,
+        onOkay: function() {
+          callback(CustomDialog.inputField.value);
+        },
+        showCancel: true,
+        onCancel: function() {
+          callback(null);
+        }
+      });
+      CustomDialog.inputField.value = defaultValue;
+  }, 10);
 };
 
 /** Hides any currently visible dialog. */

@@ -64,6 +64,9 @@ function fullScreen(_element) {
             document.removeEventListener('MSFullscreenChange', exitFullScreen, false);
         }
     }
+    if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock('landscape');
+    }
 };
 
 function exitFullScreen() {

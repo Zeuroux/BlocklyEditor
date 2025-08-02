@@ -1054,7 +1054,7 @@ Blockly.FieldTextInput.prototype.showEditor_ = function(a, b) {
     ) {
         setTimeout(() => {
             this.showPromptEditor_();
-        }, 200);
+        }, 10);
     } else {
         this.showInlineEditor_(a);
     }
